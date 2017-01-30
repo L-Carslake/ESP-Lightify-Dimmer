@@ -8,12 +8,12 @@ The middle of a potentiometer is conncted to A0 and the on-off switch to pin 4. 
 Individual bulbs can be controleld by changing the FF:FF:FF:FF:FF:FF string to the MAC Address of your bulb in reverse. (e.g MAC of bulb 12:34:56:78:9A:BC:DE then, 0xed, 0xcb, 0xa9, 0x87, 0x65, 0x43, 0x21). I'd like to extend this to control groups of bulbs however, the documentation of the local API does not currently include this.
 
 ##TO-DO
-*Power savings (Sleep wireless)
-*on-off button change to interrupt
-*automated reset set time of day
-*Arduino OTA updates
-*Fade on/off 
-*only send brightness command when potentiometer has stopped moving
-*Wakeup light option (in Home automation?)
-*Add color temperature control
-*Colour temp dpending on time of day
+* Power savings (Sleep wireless)
+* on-off button change to interrupt
+* automated reset set time of day
+* Arduino OTA updates
+* Fade on/off 
+* only send brightness command when potentiometer has stopped moving
+* Wakeup light option (in Home automation?)
+* Add color temperature control
+* Colour temp dpending on time of day
