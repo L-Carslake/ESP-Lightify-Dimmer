@@ -1,15 +1,5 @@
 #include "ESP8266WiFi.h"
 
-//Power savings (Sleep wireless)
-//on-off button change to interrupt
-//automated reset set time of day
-//Arduino OTA updates
-//Fade on/off 
-//only send brightness command when potentiometer has stopped moving
-//Wakeup light option (in Home automation?)
-//Add color temperature control
-//Colour temp dpending on time of day
-
 WiFiClient client;
 IPAddress hub(192, 168, 11, 34);  //IP Address of Lightify Gateway
 
