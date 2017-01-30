@@ -1,2 +1,5 @@
 # ESP-Lightify-Dimmer
-A simple implementation of a dimmer switch on the esp8266. Requires an potentimeter and switch to control.
+A simple implementation of a dimmer switch on the esp8266. This will control all lights conncted to the hub. Individual bulbs can be controleld by changing the FF:FF:FF:FF:FF:FF string to the MAC Address of your bulb in reverse. (e.g MAC of bulb 12:34:56:78:9A:BC:DE then, 0xed, 0xcb, 0xa9, 0x87, 0x65, 0x43, 0x21
+
+# Hardware
+The middle of a potentiometer is conncted to A0 and the on-off switch to pin 4. I recycled the required switch/potentometer from a 230v dimmer module, which also has the advantage of this project fitting nicely to most wall plates.
