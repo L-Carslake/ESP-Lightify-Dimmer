@@ -1,21 +1,20 @@
 #include "ESP8266WiFi.h"
 
-//Power savings (When off turn off wireless>)
-//on off switch to interrupt
+//Power savings (Sleep wireless)
+//on-off button change to interrupt
 //automated reset set time of day
-//Arduino OTA
-//Fade on/off
-//only send brightness command when stopped moving
+//Arduino OTA updates
+//Fade on/off 
+//only send brightness command when potentiometer has stopped moving
 //Wakeup light option (in Home automation?)
 //Add color temperature control
-//Colour temp dpending on time of day?
+//Colour temp dpending on time of day
 
 WiFiClient client;
-IPAddress hub(192, 168, 11, 34);
+IPAddress hub(192, 168, 11, 34);  //IP Address of Lightify Gateway
 
 byte ONOFF[] = {0x0f, 0x00, 0x00, 0x32, 0x01, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x02};
 byte BRIGHTNESS_ALL[] = {0x11, 0x00, 0x00, 0x31, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x03, 0x00};
-byte DETAILS[] = {0x0B, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00};
 
 int rotaryLastVal, rotaryVal;
 bool switchState;
@@ -30,12 +29,13 @@ void setup() {
   while ( WiFi.status() != WL_CONNECTED) {
     delay(10);
   }
-
   client.setNoDelay(true);
   
+//Debug Serial
   Serial.println("Connected");
   Serial.println(WiFi.localIP());
 
+//Input Setup
   pinMode(A0, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
 
@@ -45,10 +45,13 @@ void setup() {
 }
 
 void loop() {
+//On-Off function  
   if (digitalRead(4) != switchState) {
     onOff();
     delay(100);
   }
+  
+//Dimmer function    
   rotaryVal = analogRead(A0);
   level = map(level, 0, 1007, 0, 100);
 
