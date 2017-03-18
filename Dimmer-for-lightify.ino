@@ -43,7 +43,6 @@ void loop() {
   
 //Dimmer function    
   rotaryVal = analogRead(A0);
-  level = map(level, 0, 1007, 0, 100);
 
   if ((rotaryVal < (rotaryLastVal - 8) || rotaryVal > (rotaryLastVal + 8)) && switchState == 1 ) {
     delay(150);
@@ -65,6 +64,7 @@ void onOff() {
 }
 
 void brightness(int level) {
+  level = map(level, 0, 1007, 0, 100);
   client.connect(hub, 4000);
   Serial.print("Brightness called");
   Serial.println(level);
