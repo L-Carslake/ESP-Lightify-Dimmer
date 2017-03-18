@@ -11,8 +11,8 @@ bool switchState;
 
 void setup() {
   Serial.begin(115200);
-
-  //Wifi Settings
+  
+//Wifi Settings
   const char* ssid     = "";
   const char* password = "";
   WiFi.begin(ssid, password);
@@ -20,12 +20,12 @@ void setup() {
     delay(10);
   }
   client.setNoDelay(true);
-
-  //Debug Serial
+  
+//Debug Serial
   Serial.println("Connected");
   Serial.println(WiFi.localIP());
 
-  //Input Setup
+//Input Setup
   pinMode(A0, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
 
@@ -35,19 +35,20 @@ void setup() {
 }
 
 void loop() {
-  //On-Off function
+//On-Off function  
   if (digitalRead(4) != switchState) {
     onOff();
     delay(100);
   }
-
-  //Dimmer function
+  
+//Dimmer function    
   rotaryVal = analogRead(A0);
+  level = map(level, 0, 1007, 0, 100);
 
   if ((rotaryVal < (rotaryLastVal - 8) || rotaryVal > (rotaryLastVal + 8)) && switchState == 1 ) {
     delay(150);
     rotaryVal = analogRead(A0);
-
+    
     brightness(rotaryVal);
     rotaryLastVal = rotaryVal;
   }
@@ -64,7 +65,6 @@ void onOff() {
 }
 
 void brightness(int level) {
-  level = map(level, 0, 1007, 0, 100);
   client.connect(hub, 4000);
   Serial.print("Brightness called");
   Serial.println(level);
@@ -74,12 +74,10 @@ void brightness(int level) {
   client.stop();
 }
 
-void reboot() {
-  if (millis() > 86400000) {
-    ESP.reset();
+void reboot(){
+  if(millis() > 86400000){
+  ESP.reset();}
   }
-}
 
-void webinterface() {
-}
+
 
